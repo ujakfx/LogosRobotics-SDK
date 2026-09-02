@@ -1,3 +1,10 @@
+#pragma once
+
+#include "IHal.h"
+
+namespace LogosRobotics::Hal
+{
+
 class DesktopMockHal : public IHal
 {
 public:
@@ -16,4 +23,17 @@ public:
 
     Core::Result stepMotor(
         Core::Motor motor) override;
+
+    Core::Result stepMotors(
+        bool stepA,
+        bool stepB) override;
+
+    bool isLimitActive(
+        Limit limit) const override;
+
+    Core::Result liftUp() override;
+
+    Core::Result liftDown() override;
 };
+
+} // namespace LogosRobotics::Hal

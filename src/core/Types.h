@@ -26,12 +26,12 @@
 namespace LogosRobotics::Core
 {
 
-using Coordinate = std::int32_t;   // Logical coordinates
+using Coordinate = std::int32_t;   // Cartesian coordinate (X/Y)
 
 using StepCount  = std::uint32_t;  // Number of motor steps
 
-using Speed = std::uint32_t;
+using Speed      = std::uint32_t;  // Steps per second (for now)
 
-using TimeUs = std::uint32_t;
+using TimeUs     = std::uint32_t;  // Microseconds
 
 }

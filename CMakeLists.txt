@@ -15,11 +15,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(LogosRoboticsSDK
 
-    sdk/kinematics/CoreXYKinematics.cpp
+    # Kinematics
+    src/kinematics/CoreXYKinematics.cpp
+
+    # Motion
+    src/motion/MotionEngine.cpp
+    
+    src/motion/HomingController.cpp
+
+    # Planner
+    src/planner/LinearMotionPlanner.cpp
+
+    # HAL
+    src/hal/DesktopMockHal.cpp
 )
 
 target_include_directories(LogosRoboticsSDK PUBLIC
-    ${PROJECT_SOURCE_DIR}/sdk
+    ${PROJECT_SOURCE_DIR}/src
 )
 
 # -------------------------------------------------------
@@ -27,10 +39,17 @@ target_include_directories(LogosRoboticsSDK PUBLIC
 # -------------------------------------------------------
 
 add_executable(CoreXYKinematics_Test
-
     tests/CoreXYKinematics_Test.cpp
 )
 
 target_link_libraries(CoreXYKinematics_Test
+    LogosRoboticsSDK
+)
+
+add_executable(MotionEngine_Test
+    tests/MotionEngine_Test.cpp
+)
+
+target_link_libraries(MotionEngine_Test
     LogosRoboticsSDK
 )

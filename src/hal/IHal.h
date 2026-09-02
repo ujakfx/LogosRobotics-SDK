@@ -12,7 +12,7 @@
     HAL
 
  Build:
-    003
+    006
 
  License:
     MIT
@@ -27,6 +27,15 @@
 
 namespace LogosRobotics::Hal
 {
+
+enum class Limit
+{
+    XMin,
+    XMax,
+    YMin,
+    YMax
+};
+
 
 class IHal
 {
@@ -48,6 +57,17 @@ public:
 
     virtual Core::Result stepMotor(
         Core::Motor motor) = 0;
+
+    virtual Core::Result stepMotors(
+        bool stepA,
+        bool stepB) = 0;
+
+    virtual bool isLimitActive(
+        Limit limit) const = 0;
+
+    virtual Core::Result liftUp() = 0;
+
+    virtual Core::Result liftDown() = 0;
 };
 
 } // namespace LogosRobotics::Hal

@@ -1,66 +1,20 @@
-\## Build 002
-
-
-
-\### Added
-
-
-
-\- Desktop build system using CMake.
-
-\- GCC desktop compilation.
-
-\- First SDK static library.
-
-\- First executable desktop test.
-
-\- Initial CoreXY kinematics implementation.
-
-
-
-\## Build 002 - Foundation Verified
-
-
-
-\### Added
-
-
-
-\- Core SDK architecture
-
-\- Desktop CMake build system
-
-\- GCC desktop toolchain
-
-\- Static SDK library
-
-\- CoreXY kinematics implementation
-
-\- First verified desktop test
-
-
-
-\### Status
-
-
-
-✅ Build successful
-
-
-
-✅ Desktop test passed
-
-
-
-Verified on desktop before hardware integration.
-
-
-
 \# Changelog
 
 
 
-\## Build 002
+All notable changes to Logos Robotics SDK are documented in this file.
+
+
+
+\---
+
+
+
+\# Build 009
+
+
+
+\## MotionEngine Functional Verification
 
 
 
@@ -68,17 +22,17 @@ Verified on desktop before hardware integration.
 
 
 
-\- Core architecture
+\- MotionEngine low-level motion API
 
-\- Core interfaces
+\- Absolute machine positioning
 
-\- Core data types
+\- Internal machine position tracking
 
-\- CoreXY kinematics
+\- Homing integration
 
-\- Desktop CMake build
+\- Millimeter-to-step conversion through MachineConfig
 
-\- Desktop verification test application
+\- Integration between MotionEngine, Kinematics, Planner and HomingController
 
 
 
@@ -86,25 +40,65 @@ Verified on desktop before hardware integration.
 
 
 
-\- CoreXY transformation
+\- MotionEngine initialization
 
-\- Desktop build
+\- Homing
 
-\- Desktop execution
+\- Machine coordinate initialization
+
+\- Absolute positioning
+
+\- X-axis movement
+
+\- Y-axis movement
+
+\- Diagonal movement
+
+\- Coordinated CoreXY motion
+
+\- Movement to machine center
+
+\- Return to HOME
 
 
 
-2026
+\### Hardware Verification
 
 
 
-Initial public foundation.
+Verified on the physical ESP32-C6 CoreXY reference machine.
 
 
 
-Commit:
+Test sequence:
 
 
 
-f2d0d69
+```text
+
+HOME
+
+&#x20; ↓
+
+CENTER (229,308)
+
+&#x20; ↓
+
+(100,100)
+
+&#x20; ↓
+
+(300,100)
+
+&#x20; ↓
+
+(300,400)
+
+&#x20; ↓
+
+CENTER (229,308)
+
+&#x20; ↓
+
+HOME
 

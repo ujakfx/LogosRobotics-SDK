@@ -4,7 +4,7 @@
 
 **Logos Robotics SDK** is an educational open-source Software Development Kit (SDK) for robotics motion control.
 
-The project focuses on clean software architecture, modular design, and real hardware verification. Its purpose is not only to build reliable motion control systems, but also to serve as an educational reference for embedded software engineering, robotics software architecture, and motion control design.
+The project focuses on clean software architecture, modular design, and real hardware verification. Its purpose is not only to build reliable motion control systems, but also to serve as an educational reference for embedded software engineering, robotics software architecture, kinematics, motion planning, and hardware abstraction.
 
 ---
 
@@ -12,7 +12,9 @@ The project focuses on clean software architecture, modular design, and real har
 
 The goal of Logos Robotics SDK is to create a modular, hardware-independent motion control platform that can be reused across different robotics projects.
 
-The first reference implementation targets a CoreXY motion system running on ESP32 using the Arduino Framework. The architecture is designed to support additional kinematic models and hardware platforms in future releases.
+The first reference implementation targets a **CoreXY motion system running on ESP32-C6 using the Arduino Framework**.
+
+The architecture is designed to support additional kinematic models and hardware platforms in future releases.
 
 ---
 
@@ -24,7 +26,8 @@ The first reference implementation targets a CoreXY motion system running on ESP
 - Clean Architecture
 - Hardware Independent
 - Modular Design
-- Verified on Real Hardware
+- Real Hardware Verification
+- Reusable Components
 
 ---
 
@@ -37,6 +40,9 @@ The first reference implementation targets a CoreXY motion system running on ESP
 - Readable code over clever code.
 - No feature enters the project without successful testing.
 - Architecture first. Implementation second.
+- Hardware-dependent features must be verified on real hardware.
+- Higher layers must not depend on higher-level concepts from lower layers.
+- Lower layers must remain independent of higher layers.
 
 ---
 
@@ -48,121 +54,16 @@ The SDK follows a layered architecture.
                 Application
                      │
                      ▼
-                 IPlanner
+              MotionPlanner
                      │
                      ▼
-               IKinematics
+               MotionEngine
                      │
                      ▼
-              IMotionEngine
+                IKinematics
                      │
                      ▼
-                    IHal
-                     │
-                     ▼
-             Esp32ArduinoHal
+                    HAL
                      │
                      ▼
                  Hardware
-```
-
-Each layer has a single responsibility and communicates only with the layer directly below it.
-
----
-
-# Current Status
-
-**Build 002 – Core Foundation Verified**
-
-Completed:
-
-- Core module
-- Core data types
-- Core interfaces
-- CoreXY kinematics
-- Desktop CMake build
-- Desktop verification tests
-- Architecture documentation
-
-Current status:
-
-- Desktop build verified
-- CoreXY transformation verified
-- Ready for HAL implementation
-
----
-
-# Repository Structure
-
-```text
-docs/
-sdk/
-examples/
-tests/
-```
-
-Documentation and software evolve together.
-
----
-
-# Development Philosophy
-
-> **Built to understand, not only to work.**
-
-Logos Robotics SDK is developed through small, verifiable engineering steps.
-
-Every architectural decision is documented.
-
-Every important feature is validated before becoming part of the SDK.
-
-The objective is not only to create reliable software, but also to help others understand how professional robotics software is designed.
-
----
-
-# Reference Platform
-
-Current reference platform:
-
-- ESP32
-- Arduino Framework
-- CoreXY Motion System
-
-Future platforms may include:
-
-- ESP-IDF
-- STM32
-- Raspberry Pi
-- Linux
-
-Future kinematic models may include:
-
-- Cartesian
-- Delta
-- Polar
-- SCARA
-
----
-
-# Contributors
-
-## Project Founder
-
-**Prele Prelević**
-
-## Software Architecture and Development
-
-Developed in collaboration with OpenAI ChatGPT.
-
----
-
-# License
-
-MIT License
-
----
-
-## Current Development
-
-The project is under active development.
-
-The architecture is considered stable, while new functionality is implemented and verified incrementally.

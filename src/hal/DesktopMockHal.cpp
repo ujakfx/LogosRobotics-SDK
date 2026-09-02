@@ -12,7 +12,7 @@
     HAL
 
  Build:
-    003
+    012
 
  License:
     MIT
@@ -58,7 +58,6 @@ const char* directionName(Core::Direction direction)
 
 } // anonymous namespace
 
-//---------------------------------------------------------------
 
 Core::Result DesktopMockHal::initialize()
 {
@@ -68,7 +67,6 @@ Core::Result DesktopMockHal::initialize()
     return Core::Result::Ok;
 }
 
-//---------------------------------------------------------------
 
 Core::Result DesktopMockHal::enableMotor(
     Core::Motor motor)
@@ -81,7 +79,6 @@ Core::Result DesktopMockHal::enableMotor(
     return Core::Result::Ok;
 }
 
-//---------------------------------------------------------------
 
 Core::Result DesktopMockHal::disableMotor(
     Core::Motor motor)
@@ -94,7 +91,6 @@ Core::Result DesktopMockHal::disableMotor(
     return Core::Result::Ok;
 }
 
-//---------------------------------------------------------------
 
 Core::Result DesktopMockHal::setDirection(
     Core::Motor motor,
@@ -110,7 +106,6 @@ Core::Result DesktopMockHal::setDirection(
     return Core::Result::Ok;
 }
 
-//---------------------------------------------------------------
 
 Core::Result DesktopMockHal::stepMotor(
     Core::Motor motor)
@@ -119,6 +114,59 @@ Core::Result DesktopMockHal::stepMotor(
         << "[HAL] STEP "
         << motorName(motor)
         << '\n';
+
+    return Core::Result::Ok;
+}
+
+
+Core::Result DesktopMockHal::stepMotors(
+    bool stepA,
+    bool stepB)
+{
+    std::cout
+        << "[HAL] STEP";
+
+    if (stepA)
+    {
+        std::cout << " A";
+    }
+
+    if (stepB)
+    {
+        std::cout << " B";
+    }
+
+    std::cout << '\n';
+
+    return Core::Result::Ok;
+}
+
+
+bool DesktopMockHal::isLimitActive(
+    Limit limit) const
+{
+    // Desktop mock has no physical limit switches.
+    // Limits are therefore inactive by default.
+
+    (void)limit;
+
+    return false;
+}
+
+
+Core::Result DesktopMockHal::liftUp()
+{
+    std::cout
+        << "[HAL] Lift UP\n";
+
+    return Core::Result::Ok;
+}
+
+
+Core::Result DesktopMockHal::liftDown()
+{
+    std::cout
+        << "[HAL] Lift DOWN\n";
 
     return Core::Result::Ok;
 }

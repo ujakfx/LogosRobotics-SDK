@@ -12,7 +12,7 @@
     Kinematics
 
  Build:
-    002
+    003
 
  License:
     MIT
@@ -35,25 +35,50 @@ Core::Result CoreXYKinematics::transform(
     Core::MotorCommandBuffer& commands) const
 {
     commands.clear();
+
+
+    // ---------------------------------------------------------
     // CoreXY transformation
-    Core::Coordinate deltaA = position.x + position.y;
-    Core::Coordinate deltaB = position.x - position.y;
+    //
+    // Machine motor orientation:
+    //
+    // X+ = A-, B-
+    // Y+ = A-, B+
+    //
+    // Therefore:
+    //
+    // A = -X - Y
+    // B = -X + Y
+    // ---------------------------------------------------------
+
+    Core::Coordinate deltaA =
+        -position.x - position.y;
+
+    Core::Coordinate deltaB =
+        -position.x + position.y;
+
 
     Core::Direction directionA =
         (deltaA >= 0)
             ? Core::Direction::Positive
             : Core::Direction::Negative;
 
+
     Core::Direction directionB =
         (deltaB >= 0)
             ? Core::Direction::Positive
             : Core::Direction::Negative;
 
+
     Core::StepCount stepsA =
-        static_cast<Core::StepCount>(std::abs(deltaA));
+        static_cast<Core::StepCount>(
+            std::abs(deltaA));
+
 
     Core::StepCount stepsB =
-        static_cast<Core::StepCount>(std::abs(deltaB));
+        static_cast<Core::StepCount>(
+            std::abs(deltaB));
+
 
     Core::MotorCommand commandA
     {
@@ -62,6 +87,7 @@ Core::Result CoreXYKinematics::transform(
         stepsA
     };
 
+
     Core::MotorCommand commandB
     {
         Core::Motor::B,
@@ -69,17 +95,20 @@ Core::Result CoreXYKinematics::transform(
         stepsB
     };
 
+
     if (!commands.add(commandA))
     {
         return Core::Result::BufferOverflow;
     }
 
+
     if (!commands.add(commandB))
     {
         return Core::Result::BufferOverflow;
     }
-        
-	return Core::Result::Ok;
+
+
+    return Core::Result::Ok;
 }
 
 } // namespace LogosRobotics::Kinematics
